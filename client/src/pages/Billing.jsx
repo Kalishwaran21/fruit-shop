@@ -18,10 +18,10 @@ export default function Billing() {
 
   const loadData = async () => {
     const [fRes, wRes, sRes, saleRes] = await Promise.all([
-      fetch('http://localhost:5000/api/fruits'),
-      fetch('http://localhost:5000/api/wastage'),
-      fetch('http://localhost:5000/api/stock'),
-      fetch('http://localhost:5000/api/sales'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/fruits'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/wastage'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/stock'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/sales'),
     ]);
     const [fruitsData, wastageData, stockData, salesData] = await Promise.all([
       fRes.json(), wRes.json(), sRes.json(), saleRes.json(),
@@ -101,7 +101,7 @@ export default function Billing() {
     }
 
     const invoicePayload = { invoiceId, items: cart, grandTotal, date: new Date().toISOString() };
-    await fetch('http://localhost:5000/api/sales', {
+    await fetch('https://fruit-shop-bhxj.onrender.com/api/sales', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(invoicePayload),

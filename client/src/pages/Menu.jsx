@@ -13,7 +13,7 @@ export default function Menu() {
   const [showForm, setShowForm] = useState(false);
 
   const loadFruits = async () => {
-    const res = await fetch('http://localhost:5000/api/fruits');
+    const res = await fetch('https://fruit-shop-bhxj.onrender.com/api/fruits');
     const data = await res.json();
     setFruits(data.sort((a, b) => a.name.localeCompare(b.name)));
     setLoading(false);
@@ -25,7 +25,7 @@ export default function Menu() {
     e.preventDefault();
     setSubmitting(true);
     if (editId) {
-      await fetch(`http://localhost:5000/api/fruits/${editId}`, {
+      await fetch(`https://fruit-shop-bhxj.onrender.com/api/fruits/${editId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -33,7 +33,7 @@ export default function Menu() {
       toast(`✅ ${form.name} updated successfully!`, 'success');
       setEditId(null);
     } else {
-      await fetch('http://localhost:5000/api/fruits', {
+      await fetch('https://fruit-shop-bhxj.onrender.com/api/fruits', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -48,7 +48,7 @@ export default function Menu() {
 
   const deleteFruit = async (id, name) => {
     if (!window.confirm(`Delete ${name} from the catalog?`)) return;
-    await fetch(`http://localhost:5000/api/fruits/${id}`, { method: 'DELETE' });
+    await fetch(`https://fruit-shop-bhxj.onrender.com/api/fruits/${id}`, { method: 'DELETE' });
     toast(`🗑️ ${name} removed from catalog.`, 'success');
     loadFruits();
   };

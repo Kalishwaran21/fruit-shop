@@ -34,11 +34,11 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchAll = async () => {
       const [sRes, fRes, stRes, wRes, salRes] = await Promise.all([
-        fetch('http://localhost:5000/api/sales'),
-        fetch('http://localhost:5000/api/fruits'),
-        fetch('http://localhost:5000/api/stock'),
-        fetch('http://localhost:5000/api/wastage'),
-        fetch('http://localhost:5000/api/sales'),
+        fetch('https://fruit-shop-bhxj.onrender.com/api/sales'),
+        fetch('https://fruit-shop-bhxj.onrender.com/api/fruits'),
+        fetch('https://fruit-shop-bhxj.onrender.com/api/stock'),
+        fetch('https://fruit-shop-bhxj.onrender.com/api/wastage'),
+        fetch('https://fruit-shop-bhxj.onrender.com/api/sales'),
       ]);
       const [salesData, fruitsData, stockData, wastageData] = await Promise.all([
         sRes.json(), fRes.json(), stRes.json(), wRes.json(),

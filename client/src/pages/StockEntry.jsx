@@ -12,8 +12,8 @@ export default function StockEntry() {
 
   const loadData = async () => {
     const [fRes, sRes] = await Promise.all([
-      fetch('http://localhost:5000/api/fruits'),
-      fetch('http://localhost:5000/api/stock'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/fruits'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/stock'),
     ]);
     const [fruitsData, stockData] = await Promise.all([fRes.json(), sRes.json()]);
     setFruits(fruitsData.sort((a, b) => a.name.localeCompare(b.name)));
@@ -30,7 +30,7 @@ export default function StockEntry() {
     if (!selectedFruit || isNaN(qty) || qty <= 0) return;
 
     setSubmitting(true);
-    await fetch('http://localhost:5000/api/stock', {
+    await fetch('https://fruit-shop-bhxj.onrender.com/api/stock', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fruitId: selectedFruit._id, name: selectedFruit.name, qty }),

@@ -1,6 +1,4 @@
-// Central API config — update IP to your computer's local IP!
-// Find it by running: ipconfig  (look for IPv4 address, e.g. 192.168.1.5)
-export const API_BASE = 'http://10.24.132.22:5000/api';
+export const API_BASE = 'https://fruit-shop-bhxj.onrender.com/api';
 
 import axios from 'axios';
 

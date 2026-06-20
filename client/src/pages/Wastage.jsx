@@ -15,10 +15,10 @@ export default function Wastage() {
 
   const loadData = async () => {
     const [fRes, wRes, sRes, saleRes] = await Promise.all([
-      fetch('http://localhost:5000/api/fruits'),
-      fetch('http://localhost:5000/api/wastage'),
-      fetch('http://localhost:5000/api/stock'),
-      fetch('http://localhost:5000/api/sales'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/fruits'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/wastage'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/stock'),
+      fetch('https://fruit-shop-bhxj.onrender.com/api/sales'),
     ]);
     const [fruitsData, wastageData, stockData, salesData] = await Promise.all([
       fRes.json(), wRes.json(), sRes.json(), saleRes.json(),
@@ -56,7 +56,7 @@ export default function Wastage() {
     }
 
     setSubmitting(true);
-    await fetch('http://localhost:5000/api/wastage', {
+    await fetch('https://fruit-shop-bhxj.onrender.com/api/wastage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fruitId: selectedFruit._id, name: selectedFruit.name, qty }),
