@@ -6,8 +6,8 @@ router.post('/login', (req, res) => {
   const { username, password } = req.body;
   
   // Using simple hardcoded admin credentials or env variables
-  const adminUsername = process.env.ADMIN_USERNAME || 'admin';
-  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  const adminUsername = process.env.ADMIN_USERNAME || 'Branch 1';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'Start*1';
 
   if (username === adminUsername && password === adminPassword) {
     // Return a dummy token to satisfy the client
