@@ -9,7 +9,7 @@ const router = express.Router();
 // --- Fruits ---
 router.get('/fruits', async (req, res) => {
   try {
-    const fruits = await Fruit.find().sort({ name: 1 });
+    const fruits = await Fruit.find().sort({ name: 1 }).lean();
     res.json(fruits);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -48,7 +48,7 @@ router.delete('/fruits/:id', async (req, res) => {
 // --- Stock Entry ---
 router.get('/stock', async (req, res) => {
   try {
-    const stock = await Stock.find().sort({ timestamp: -1 });
+    const stock = await Stock.find().sort({ timestamp: -1 }).lean();
     res.json(stock);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -69,7 +69,7 @@ router.post('/stock', async (req, res) => {
 // --- Wastage ---
 router.get('/wastage', async (req, res) => {
   try {
-    const wastage = await Wastage.find().sort({ timestamp: -1 });
+    const wastage = await Wastage.find().sort({ timestamp: -1 }).lean();
     res.json(wastage);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -90,7 +90,7 @@ router.post('/wastage', async (req, res) => {
 // --- Sales (Billing) ---
 router.get('/sales', async (req, res) => {
   try {
-    const sales = await Sale.find().sort({ date: -1 });
+    const sales = await Sale.find().sort({ date: -1 }).lean();
     res.json(sales);
   } catch (error) {
     res.status(500).json({ message: error.message });
