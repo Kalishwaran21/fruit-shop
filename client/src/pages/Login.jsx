@@ -19,6 +19,13 @@ export default function Login({ onLogin }) {
         body: JSON.stringify({ username, password })
       });
       
+      if (!response.ok) {
+        const text = await response.text();
+        console.error('Server error response:', text);
+        toast(`Server error (${response.status}). Please try again.`, 'error');
+        return;
+      }
+      
       const data = await response.json();
       
       if (data.success) {
@@ -28,7 +35,8 @@ export default function Login({ onLogin }) {
         toast(data.message || 'Invalid credentials', 'error');
       }
     } catch (err) {
-      toast('Cannot connect to server', 'error');
+      console.error('Connection error details:', err);
+      toast(`Connection error: ${err.message || 'Cannot connect to server'}`, 'error');
     } finally {
       setLoading(false);
     }
