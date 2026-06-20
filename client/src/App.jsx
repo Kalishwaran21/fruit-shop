@@ -75,6 +75,8 @@ function App() {
                   <Route path="/wastage" element={<Wastage />} />
                 </Routes>
               </AnimatePresence>
+              {/* Bulletproof spacer for mobile bottom nav */}
+              <div style={{ height: '100px', width: '100%' }}></div>
             </div>
           </>
         ) : (
