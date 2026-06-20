@@ -1,0 +1,262 @@
+/* =============================================
+   📱 NAV LABEL RESPONSIVE HELPERS
+   ============================================= */
+/* Desktop: show full label, hide short one */
+.nav-label-mobile  { display: none; }
+.nav-label-desktop { display: inline; }
+
+@media (max-width: 768px) {
+  /* Mobile: hide full label, show short one */
+  .nav-label-desktop { display: none; }
+  .nav-label-mobile  { display: inline; }
+}
+
+/* =============================================
+   🌀 SPINNER LOADER
+   ============================================= */
+@keyframes spinLoader {
+  to { transform: rotate(360deg); }
+}
+
+/* =============================================
+   🍞 TOAST SLIDE IN
+   ============================================= */
+@keyframes toastSlideIn {
+  from { transform: translateX(100px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* =============================================
+   📜 CUSTOM SCROLLBAR
+   ============================================= */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: rgba(5,26,10,0.4); }
+::-webkit-scrollbar-thumb {
+  background: rgba(52,211,153,0.45);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(52,211,153,0.75); }
+
+/* =============================================
+   🌈 GRADIENT TEXT UTILITY
+   ============================================= */
+.gradient-text {
+  background: linear-gradient(135deg, #34d399 0%, #fbbf24 60%, #f87171 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =============================================
+   💥 RIPPLE BUTTON EFFECT
+   ============================================= */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.btn:active::after {
+  opacity: 1;
+  transition: opacity 0s;
+}
+
+/* =============================================
+   ✨ ANIMATED BORDER on focus inputs
+   ============================================= */
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(52,211,153,0.15); }
+  50%       { box-shadow: 0 0 0 4px rgba(52,211,153,0.35); }
+}
+.input-group input:focus, .input-group select:focus {
+  animation: borderGlow 2s ease infinite;
+}
+
+/* =============================================
+   🍎 FRUIT PARTICLES - Floating Background Emojis
+   ============================================= */
+.fruit-particles-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.fruit-particle {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  animation: floatUp linear infinite;
+  user-select: none;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(110vh) rotate(0deg) scale(0.5); opacity: 0; }
+  10%  { opacity: 0.15; }
+  90%  { opacity: 0.12; }
+  100% { transform: translateY(-10vh) rotate(360deg) scale(1); opacity: 0; }
+}
+
+/* =============================================
+   ✨ GLOW CARDS - Neon pulse on hover
+   ============================================= */
+.glow-card {
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+.glow-card:hover {
+  box-shadow: 0 0 25px rgba(52,211,153,0.4), 0 0 70px rgba(52,211,153,0.12);
+  transform: translateY(-6px) scale(1.01);
+}
+.glow-card.blue:hover  { box-shadow: 0 0 25px rgba(96,165,250,0.5),  0 0 70px rgba(96,165,250,0.15); }
+.glow-card.orange:hover{ box-shadow: 0 0 25px rgba(251,191,36,0.5),  0 0 70px rgba(251,191,36,0.15); }
+.glow-card.purple:hover{ box-shadow: 0 0 25px rgba(167,139,250,0.5), 0 0 70px rgba(167,139,250,0.15); }
+
+/* =============================================
+   🌊 SHIMMER SKELETON - Loading placeholder
+   ============================================= */
+.shimmer-wrapper {
+  background: rgba(255,255,255,0.7);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+  position: relative;
+}
+.shimmer-line {
+  background: linear-gradient(90deg,
+    rgba(230,230,230,0.8) 25%,
+    rgba(255,255,255,0.9) 50%,
+    rgba(230,230,230,0.8) 75%
+  );
+  background-size: 400% 100%;
+  animation: shimmerSlide 1.5s ease-in-out infinite;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+@keyframes shimmerSlide {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* =============================================
+   🟢 BADGE PULSE - Alert animations for low/empty stock
+   ============================================= */
+.badge-low {
+  animation: pulseLow 2s ease-in-out infinite;
+}
+@keyframes pulseLow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(245,158,11,0); }
+}
+
+.badge-empty {
+  animation: pulseEmpty 1.2s ease-in-out infinite;
+}
+@keyframes pulseEmpty {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+  50%       { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+}
+
+/* =============================================
+   🃏 3D CARD FLIP - Page load reveal
+   ============================================= */
+.flip-card-enter {
+  animation: flipReveal 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+@keyframes flipReveal {
+  0%   { opacity:0; transform: perspective(800px) rotateX(-30deg) translateY(40px); }
+  100% { opacity:1; transform: perspective(800px) rotateX(0deg)   translateY(0);    }
+}
+
+/* =============================================
+   📊 COUNTER NUMBER ANIMATION
+   ============================================= */
+.count-up {
+  display: inline-block;
+  animation: countPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes countPop {
+  0%   { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+/* =============================================
+   🎊 CONFETTI OVERLAY - Visual success state
+   ============================================= */
+.checkout-success-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16,185,129,0.08);
+  z-index: 9998;
+  pointer-events: none;
+  animation: successFade 1.5s ease forwards;
+}
+@keyframes successFade {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* =============================================
+   🍓 FRUIT HERO BANNER on Dashboard
+   ============================================= */
+.fruit-hero-banner {
+  background: linear-gradient(135deg, rgba(2,20,8,0.85) 0%, rgba(5,46,22,0.9) 50%, rgba(6,78,59,0.85) 100%);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: 20px;
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 80px rgba(52, 211, 153, 0.08);
+}
+.fruit-hero-banner h1 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.fruit-hero-banner p {
+  color: rgba(255,255,255,0.75);
+  margin-top: 8px;
+}
+.fruit-hero-emojis {
+  font-size: 3.5rem;
+  display: flex;
+  gap: 16px;
+}
+.fruit-hero-emojis span {
+  display: inline-block;
+  animation: heroFruitBounce 2s ease-in-out infinite;
+}
+.fruit-hero-emojis span:nth-child(1) { animation-delay: 0s; }
+.fruit-hero-emojis span:nth-child(2) { animation-delay: 0.3s; }
+.fruit-hero-emojis span:nth-child(3) { animation-delay: 0.6s; }
+.fruit-hero-emojis span:nth-child(4) { animation-delay: 0.9s; }
+.fruit-hero-emojis span:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes heroFruitBounce {
+  0%,100% { transform: translateY(0) rotate(-5deg) scale(1); }
+  50%      { transform: translateY(-15px) rotate(5deg) scale(1.15); }
+}
+
+@media (max-width: 768px) {
+  .fruit-hero-banner {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .fruit-hero-banner h1 { font-size: 1.4rem; }
+  .fruit-hero-emojis { font-size: 2rem; gap: 10px; }
+}

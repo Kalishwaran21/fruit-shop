@@ -1,0 +1,113 @@
+import { StyleSheet } from 'react-native';
+
+export const COLORS = {
+  bg:        '#021408',
+  card:      'rgba(5,26,10,0.9)',
+  primary:   '#34d399',
+  accent:    '#fbbf24',
+  danger:    '#f87171',
+  purple:    '#a78bfa',
+  blue:      '#60a5fa',
+  border:    'rgba(52,211,153,0.2)',
+  textMain:  '#f0fdf4',
+  textMuted: '#86efac',
+};
+
+export const globalStyles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: COLORS.bg,
+  },
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  pageTitle: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: COLORS.primary,
+    marginBottom: 16,
+    marginTop: 8,
+  },
+  card: {
+    backgroundColor: COLORS.card,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 14,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  label: {
+    fontSize: 12,
+    color: COLORS.textMuted,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
+    marginBottom: 4,
+    fontWeight: '600',
+  },
+  value: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: COLORS.primary,
+  },
+  input: {
+    backgroundColor: 'rgba(5,26,10,0.8)',
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: 10,
+    padding: 13,
+    color: COLORS.textMain,
+    fontSize: 16,
+    marginBottom: 12,
+  },
+  inputLabel: {
+    fontSize: 13,
+    color: COLORS.textMuted,
+    marginBottom: 6,
+    fontWeight: '600',
+  },
+  btn: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 12,
+    padding: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 4,
+  },
+  btnText: {
+    color: '#052e16',
+    fontWeight: '800',
+    fontSize: 16,
+  },
+  btnDanger: {
+    backgroundColor: 'rgba(248,113,113,0.15)',
+    borderWidth: 1,
+    borderColor: 'rgba(248,113,113,0.3)',
+    borderRadius: 10,
+    padding: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyText: {
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    padding: 40,
+    fontSize: 15,
+    opacity: 0.5,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  badge: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 20,
+    fontSize: 12,
+    fontWeight: '700',
+    overflow: 'hidden',
+  },
+});

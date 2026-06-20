@@ -1,0 +1,34 @@
+# Logs
+*.log
+
+# Client dependencies and builds
+client/node_modules/
+client/dist/
+client/dist-ssr/
+client/*.local
+
+# Server dependencies and secrets
+server/node_modules/
+server/.env
+
+# Mobile dependencies and generated folders
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+mobile/web-build/
+mobile/expo-env.d.ts
+mobile/ios/
+mobile/android/
+
+# Mobile keys and provisioning profiles
+mobile/*.jks
+mobile/*.p8
+mobile/*.p12
+mobile/*.key
+mobile/*.mobileprovision
+mobile/*.orig.*
+
+# Editors and IDEs
+.vscode/
+.idea/
+.DS_Store
