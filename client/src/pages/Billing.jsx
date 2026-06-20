@@ -14,7 +14,8 @@ export default function Billing() {
   const [form, setForm] = useState({ fruitName: '', qty: '' });
   const [loading, setLoading] = useState(true);
   const [completedInvoice, setCompletedInvoice] = useState(null);
-  const [invoiceId] = useState(() => Math.floor(100000 + Math.random() * 900000).toString());
+  const [invoiceId, setInvoiceId] = useState(() => Math.floor(100000 + Math.random() * 900000).toString());
+  const [recentSales, setRecentSales] = useState([]);
 
   const loadData = async () => {
     const [fRes, wRes, sRes, saleRes] = await Promise.all([
@@ -28,6 +29,7 @@ export default function Billing() {
     ]);
 
     setFruits(fruitsData.sort((a, b) => a.name.localeCompare(b.name)));
+    setRecentSales(salesData);
 
     // Stock map by name
     const stockMap = {};
@@ -110,6 +112,7 @@ export default function Billing() {
     fireConfetti();
     setCompletedInvoice(invoicePayload); // 📄 Show invoice modal
     setCart([]);
+    setInvoiceId(Math.floor(100000 + Math.random() * 900000).toString()); // 🔄 Regenerate ID for next checkout
     loadData();
   };
 
@@ -203,6 +206,51 @@ export default function Billing() {
               </button>
             </div>
           </>
+        )}
+      </div>
+
+      {/* 🧾 Recent Invoices Section */}
+      <div className="glass-card flip-card-enter" style={{ marginTop: '20px' }}>
+        <h3 style={{ marginBottom: '14px', fontSize: '1.1rem', color: '#34d399', fontWeight: 600 }}>🧾 Recent Invoices</h3>
+        {loading ? <Shimmer rows={3} /> : recentSales.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '20px', color: '#86efac', opacity: 0.5, fontSize: '0.9rem' }}>No sales yet.</div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {recentSales.sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 5).map((sale, i) => (
+              <div key={i} 
+                onClick={() => setCompletedInvoice(sale)}
+                style={{
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  padding: '12px 14px',
+                  background: 'rgba(52,211,153,0.04)',
+                  border: '1px solid rgba(52,211,153,0.1)',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(52,211,153,0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(52,211,153,0.25)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(52,211,153,0.04)';
+                  e.currentTarget.style.borderColor = 'rgba(52,211,153,0.1)';
+                }}
+              >
+                <div>
+                  <div style={{ color: '#f0fdf4', fontWeight: 600, fontSize: '0.9rem' }}>#{sale.invoiceId}</div>
+                  <div style={{ color: '#86efac', fontSize: '0.78rem', marginTop: '2px' }}>
+                    {new Date(sale.date).toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                    {' · '}{sale.items.length} item{sale.items.length > 1 ? 's' : ''}
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ color: '#fbbf24', fontWeight: 800, fontSize: '1.05rem' }}>₹{sale.grandTotal.toFixed(2)}</span>
+                  <span style={{ fontSize: '0.8rem', color: '#86efac', opacity: 0.7 }}>👁️ View</span>
+                </div>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </PageTransition>
