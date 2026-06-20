@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import { Leaf, LayoutDashboard, ShoppingCart, Apple, Archive, AlertTriangle, List } from 'lucide-react';
+import { Leaf, LayoutDashboard, ShoppingCart, Apple, Archive, AlertTriangle, List, LogOut } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import './animations.css';
 import FruitParticles from './components/FruitParticles';
@@ -25,7 +25,7 @@ const NAV_ITEMS = [
   { to: '/wastage',       icon: AlertTriangle,  label: 'Wastage',       short: 'Waste' },
 ];
 
-function Navbar() {
+function Navbar({ onLogout }) {
   return (
     <nav className="navbar">
       <div className="nav-brand">
@@ -46,6 +46,11 @@ function Navbar() {
             <span className="nav-label-mobile">{short}</span>
           </NavLink>
         ))}
+        <button className="nav-btn" onClick={onLogout} style={{ border: 'none', background: 'none', cursor: 'pointer', color: 'inherit', fontFamily: 'inherit', fontSize: 'inherit' }}>
+          <LogOut size={18} />
+          <span className="nav-label-desktop">Logout</span>
+          <span className="nav-label-mobile">Out</span>
+        </button>
       </div>
     </nav>
   );
@@ -53,7 +58,27 @@ function Navbar() {
 
 function App() {
   const [splashDone, setSplashDone] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem('adminToken'));
+  const isAuthenticated = !!token;
+
+  const handleLogin = (newToken) => {
+    localStorage.setItem('adminToken', newToken);
+    setToken(newToken);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('https://fruit-shop-bhxj.onrender.com/api/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+    } catch (err) {
+      console.error('Logout error:', err);
+    }
+    localStorage.removeItem('adminToken');
+    setToken(null);
+  };
 
   return (
     <>
@@ -63,7 +88,7 @@ function App() {
         <FruitParticles count={20} />
         {isAuthenticated ? (
           <>
-            <Navbar />
+            <Navbar onLogout={handleLogout} />
             <div className="container">
               <AnimatePresence mode="wait">
                 <Routes>
@@ -79,7 +104,7 @@ function App() {
           </>
         ) : (
           <Routes>
-            <Route path="*" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
+            <Route path="*" element={<Login onLogin={handleLogin} />} />
           </Routes>
         )}
       </Router>
