@@ -14,7 +14,7 @@ export default function Billing() {
   const [form, setForm] = useState({ fruitName: '', qty: '' });
   const [loading, setLoading] = useState(true);
   const [completedInvoice, setCompletedInvoice] = useState(null);
-  const [invoiceId, setInvoiceId] = useState(() => Math.floor(100000 + Math.random() * 900000).toString());
+  const [invoiceId, setInvoiceId] = useState('000001');
   const [recentSales, setRecentSales] = useState([]);
 
   const loadData = async () => {
@@ -30,6 +30,12 @@ export default function Billing() {
 
     setFruits(fruitsData.sort((a, b) => a.name.localeCompare(b.name)));
     setRecentSales(salesData);
+
+    // Calculate sequential Invoice ID starting from 000001
+    const nextInvoiceNum = salesData.length > 0 
+      ? Math.max(...salesData.map(s => parseInt(s.invoiceId, 10) || 0)) + 1 
+      : 1;
+    setInvoiceId(String(nextInvoiceNum).padStart(6, '0'));
 
     // Stock map by name
     const stockMap = {};
@@ -112,7 +118,6 @@ export default function Billing() {
     fireConfetti();
     setCompletedInvoice(invoicePayload); // 📄 Show invoice modal
     setCart([]);
-    setInvoiceId(Math.floor(100000 + Math.random() * 900000).toString()); // 🔄 Regenerate ID for next checkout
     loadData();
   };
 
