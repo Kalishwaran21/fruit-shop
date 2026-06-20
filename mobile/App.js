@@ -31,12 +31,6 @@ export default function App() {
     );
   }
 
-  const LogoutButton = () => (
-    <TouchableOpacity onPress={() => setIsAuthenticated(false)} style={{ marginRight: 16 }}>
-      <Text style={{ fontSize: 18 }}>🔒</Text>
-    </TouchableOpacity>
-  );
-
   return (
     <SafeAreaProvider>
       <StatusBar barStyle="light-content" backgroundColor="#021408" />
@@ -60,8 +54,7 @@ export default function App() {
               borderBottomWidth: 1,
             },
             headerTintColor: COLORS.primary,
-            headerTitleStyle: { fontWeight: '800', fontSize: 16 },
-            headerRight: () => <LogoutButton />
+            headerTitleStyle: { fontWeight: '800', fontSize: 16 }
           }}
         >
           <Tab.Screen

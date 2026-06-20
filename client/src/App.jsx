@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import { Leaf, LayoutDashboard, ShoppingCart, Apple, Archive, AlertTriangle, List, Lock } from 'lucide-react';
+import { Leaf, LayoutDashboard, ShoppingCart, Apple, Archive, AlertTriangle, List } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import './animations.css';
 import FruitParticles from './components/FruitParticles';
@@ -25,7 +25,7 @@ const NAV_ITEMS = [
   { to: '/wastage',       icon: AlertTriangle,  label: 'Wastage',       short: 'Waste' },
 ];
 
-function Navbar({ onLogout }) {
+function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-brand">
@@ -46,11 +46,6 @@ function Navbar({ onLogout }) {
             <span className="nav-label-mobile">{short}</span>
           </NavLink>
         ))}
-        <button className="nav-btn" onClick={onLogout} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
-          <Lock size={18} />
-          <span className="nav-label-desktop">Logout</span>
-          <span className="nav-label-mobile">Out</span>
-        </button>
       </div>
     </nav>
   );
@@ -68,7 +63,7 @@ function App() {
         <FruitParticles count={20} />
         {isAuthenticated ? (
           <>
-            <Navbar onLogout={() => setIsAuthenticated(false)} />
+            <Navbar />
             <div className="container">
               <AnimatePresence mode="wait">
                 <Routes>
