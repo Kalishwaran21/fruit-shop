@@ -312,7 +312,7 @@ h1, h2, h3 {
   .container {
     margin: 16px auto;
     padding: 0 12px;
-    padding-bottom: calc(var(--mobile-nav-height) + 16px);
+    padding-bottom: calc(var(--mobile-nav-height) + 80px); /* Increased from 16px to 80px to prevent last item overlap */
   }
 
   /* Cards tighter on mobile */
