@@ -1,7 +1,7 @@
 import { AlertTriangle, X } from 'lucide-react';
 
 export default function LowStockAlert({ stockDetails, onDismiss }) {
-  const lowItems = stockDetails.filter(f => f.current > 0 && f.current < 15);
+  const lowItems = stockDetails.filter(f => f.current > 0 && f.current < 5);
   const emptyItems = stockDetails.filter(f => f.current <= 0);
 
   if (lowItems.length === 0 && emptyItems.length === 0) return null;
@@ -43,7 +43,7 @@ export default function LowStockAlert({ stockDetails, onDismiss }) {
             {lowItems.length > 0 && (
               <div>
                 <div style={{ color: '#fbbf24', fontSize: '0.8rem', fontWeight: 600, marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Low Stock (Below 15 Kg)
+                  Low Stock (Below 5 Kg)
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   {lowItems.map(f => (

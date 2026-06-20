@@ -50,7 +50,7 @@ export default function CurrentStock() {
         {stockDetails.map(fruit => {
           let badgeClass = 'badge-good', badgeText = '✅ Good';
           if (fruit.current <= 0) { badgeClass = 'badge-empty'; badgeText = '🔴 Out of Stock'; }
-          else if (fruit.current < 15) { badgeClass = 'badge-low'; badgeText = '🟡 Low Stock'; }
+          else if (fruit.current < 5) { badgeClass = 'badge-low'; badgeText = '🟡 Low Stock'; }
 
           return (
             <div key={fruit._id} className="glass-card glow-card" style={{ padding: '16px 18px' }}>
