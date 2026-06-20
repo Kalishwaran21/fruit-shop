@@ -219,35 +219,6 @@ export default function Dashboard() {
           </div>
         )}
       </div>
-
-      {/* Recent Sales Feed */}
-      <div className="glass-card flip-card-enter">
-        <h3 style={{ marginBottom: '14px', fontSize: '1rem', color: '#34d399' }}>🧾 Recent Invoices</h3>
-        {loading ? <Shimmer rows={4} /> : sales.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '30px', color: '#86efac', opacity: 0.5 }}>No sales yet. Start billing! 🍊</div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {sales.slice(0, 8).map((sale, i) => (
-              <div key={i} style={{
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '12px 14px',
-                background: 'rgba(52,211,153,0.04)',
-                border: '1px solid rgba(52,211,153,0.1)',
-                borderRadius: '10px',
-              }}>
-                <div>
-                  <div style={{ color: '#f0fdf4', fontWeight: 600, fontSize: '0.9rem' }}>#{sale.invoiceId}</div>
-                  <div style={{ color: '#86efac', fontSize: '0.78rem', marginTop: '2px' }}>
-                    {new Date(sale.date).toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
-                    {' · '}{sale.items.length} item{sale.items.length > 1 ? 's' : ''}
-                  </div>
-                </div>
-                <span style={{ color: '#fbbf24', fontWeight: 800, fontSize: '1.05rem' }}>₹{sale.grandTotal.toFixed(2)}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
     </PageTransition>
   );
 }
