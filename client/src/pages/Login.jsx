@@ -19,20 +19,14 @@ export default function Login({ onLogin }) {
         body: JSON.stringify({ username, password })
       });
       
-      let data;
-      try {
-        data = await response.json();
-      } catch (e) {
+      if (!response.ok) {
         const text = await response.text();
         console.error('Server error response:', text);
         toast(`Server error (${response.status}). Please try again.`, 'error');
         return;
       }
       
-      if (!response.ok) {
-        toast(data.message || `Server error (${response.status})`, 'error');
-        return;
-      }
+      const data = await response.json();
       
       if (data.success) {
         toast('Login successful', 'success');
